@@ -35,7 +35,7 @@ export default function Home() {
                 </div>
       
                   {/* Video */}
-                  <div className="relative border z-[1] rounded-[18px] border-white mt-[28px] w-[100%] ">
+                  <div className="relative border z-[1] rounded-[18px] p-[21px] border-white mt-[28px] w-[100%] ">
                     <video src="/onam_video.mp4" type="video/mp4" class="rounded-[18px]" muted autoPlay={"autoplay"} preLoad="auto" loop>
                     </video>
                     <div className="absolute bottom-5 left-[-300px] z-[-1]">
