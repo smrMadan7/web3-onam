@@ -1,6 +1,4 @@
-'use client'
 import ConnectWallet from "@/components/core/connectWallet";
-
 
 export default function Home() {
 

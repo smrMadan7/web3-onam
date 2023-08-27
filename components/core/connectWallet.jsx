@@ -1,4 +1,4 @@
-" use client";
+"use client";
 
 import { checkNetwork } from "@/service/metamask.service";
 import { Web3Button, Web3NetworkSwitch } from "@web3modal/react";
