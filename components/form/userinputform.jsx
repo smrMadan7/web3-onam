@@ -1,15 +1,17 @@
 import { useRef, useState } from "react";
 import Modal from "../core/modal";
-
+import { useAccount, useNetwork } from "wagmi";
+import { registerUser } from "@/service/api.service";
 
 const UserInputForm = (props) => {
-    const { isOpen, setIsOpen } = props;
+    const { isOpen, setIsOpen, setIsRegistered } = props;
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [status, setStatus] = useState();
+    const { address } = useAccount();
 
-    const [nameError, seNameError] = useState(false);
+    const [nameError, setNameError] = useState(false);
     const [emailError, setEmailError] = useState(false);
 
     const formRef = useRef();
@@ -19,15 +21,52 @@ const UserInputForm = (props) => {
         setEmail();
         setStatus()
         setIsOpen(false);
+        setNameError(false);
+        setEmailError(false);
     }
 
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
-        if(name && email) {
-        setStatus("dublicate");
+        const emailRE = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        validateFields(emailRE);
+        if (name && email && email?.match(emailRE)) {
+            try {
+                const data =
+                {
+                    "email": email,
+                    "walletAddress": address.toLowerCase(),
+                    "name": name
+                }
+
+                const result = await registerUser(data);
+                if (result.status === true) {
+                    setIsRegistered(true);
+                    setStatus("success")
+                } else {
+                    setStatus("dublicate");
+                }
+            } catch (error) {
+                console.log("Error occured while registering user: ", error);
+                setStatus("failed");
+            }
         }
 
+    }
+
+
+    const validateFields = (emailRE) => {
+        if(!email || !email?.match(emailRE)) {
+            setEmailError(true);
+        } else {
+            setEmailError(false);
+        }
+
+        if(!name) {
+            setNameError(true);
+        } else {
+            setNameError(false);
+        }
     }
 
 
@@ -108,12 +147,15 @@ const UserInputForm = (props) => {
                                     <div className="flex flex-col mt-[16px]">
                                         <label className="font-[700] text-[14px]">Your Name*</label>
                                         <input onChange={(e) => setName(e.target.value)} required placeholder="Enter your name here" className="w-full border border-[#CBD5E1] px-[8px] py-[12px] rounded-[8px] mt-[12px] focus:outline-none text-[14px] font-[600]"></input>
+                                    {nameError && <div className="text-xs pt-2 text-red-500">Enter your name</div>}
+
                                     </div>
 
                                     {/* Requester email id */}
                                     <div className="flex flex-col mt-[16px]">
                                         <label className="font-[700] text-[14px]">Employee email*</label>
                                         <input name="email" type="email" onChange={(e) => setEmail(e.target.value)} required placeholder="Enter your employee email ID here" className="w-full border border-[#CBD5E1] px-[8px] py-[12px] rounded-[8px] mt-[12px] focus:outline-none text-[14px] font-[600]"></input>
+                                    {emailError && <div className="text-xs pt-2 text-red-500">Enter valid email</div>}
                                     </div>
 
                                     <div className="mt-[22px] flex px-5 bg-[#40C35D] py-[12px] rounded-[15px] justify-end">
