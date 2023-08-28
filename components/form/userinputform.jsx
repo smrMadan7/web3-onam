@@ -115,7 +115,7 @@ const UserInputForm = (props) => {
 
                                 <>
                                     <button className="absolute focus:outline-none -top-1  -right-1" onClick={handleModalClose}>
-                                        <img src="/assets/images/icons/closebuttonpopuplw.svg" alt="close" />
+                                        <img src="/close.svg" alt="close" />
                                     </button>
 
                                     <div className="rounded-t-[30px] flex h-20 bg-[url('/popup_banner.svg')]"></div>
