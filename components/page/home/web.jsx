@@ -19,7 +19,7 @@ const WebView = () => {
             {/* Content */}
             <div className=" flex flex-col justify-center items-center">
                 <div className="relative w-[40%] flex flex-col justify-center items-center">
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full item-center">
                         <img src="/tech_onam_text.svg"></img>
                         {/* Header */}
                         <div className="p-[8px] border rounded-[4px] font-[600px] text-[15px] border-[#FF5C00] text-[#FF5C00] flex gap-[4px]">
