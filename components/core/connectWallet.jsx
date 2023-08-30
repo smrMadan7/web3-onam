@@ -52,7 +52,7 @@ const ConnectWallet = () => {
     {isNetworkConnected && address && !isRegistered && (<button className="font-[600] text-[18px] lg:text-[20px] px-[29px] lg:px-[39px] py-[10px] lg:py-[16px] rounded-full text-white" style={{background: "linear-gradient(93.12deg, #AC58FF 2.77%, #1915D0 98.85%)"}} onClick={() => setIsOpen(true)}> Claim Tech Onam NFT</button>)}  
     {isNetworkConnected && !address && (<Web3Button />) }
     {!isNetworkConnected && (<Web3NetworkSwitch />)}
-    <a className="underline" href="https://sand-freesia-5e4.notion.site/Getting-Started-with-Crypto-Wallets-0ddb3f4c5e5c4fcba20a74aaeeebca8f" target="_blank">Learn more</a>
+    {/* <a className="underline" href="https://sand-freesia-5e4.notion.site/Getting-Started-with-Crypto-Wallets-0ddb3f4c5e5c4fcba20a74aaeeebca8f" target="_blank">Learn more</a> */}
 
     </div>
   );

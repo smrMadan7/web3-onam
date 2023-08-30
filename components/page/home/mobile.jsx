@@ -35,7 +35,7 @@ const MobileView = () => {
                     </div>
                 </div>
                 <div className="mt-[20px]">
-                    <ConnectWallet />
+                    {/* <ConnectWallet /> */}
                 </div>
             </div>
         </>
